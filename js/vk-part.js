@@ -142,11 +142,13 @@ function getRepost() {
 }
 
 function workRepost(data) {
+	let passed = false;
 	if(whiteList.length > 0) {
 		whiteList = shuffle(whiteList);
+		passed = true;
 		getUser(whiteList.pop());
 	}
-	else if (typeof data.response != "undefined" && data.response.items[0] && data.response.items[0].to_id && whiteList.length == 0) {
+	else if (typeof data.response != "undefined" && data.response.items[0] && data.response.items[0].to_id && !passed) {
 		getUser(data.response.items[0].to_id);
 	} else {
 		returnRandom(data);
@@ -168,11 +170,13 @@ function getLike() {
 }
 
 function workLike(data) {
+	let passed = false;
 	if(whiteList.length > 0) {
 		whiteList = shuffle(whiteList);
+		passed = true;
 		getUser(whiteList.pop());
 	}
-	else if (typeof data.response != "undefined" && data.response.items[0] && whiteList.length == 0) {
+	else if (typeof data.response != "undefined" && data.response.items[0] && !passed) {
 		getUser(data.response.items[0]);
 	} else {
 		returnRandom(data);
