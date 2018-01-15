@@ -142,7 +142,11 @@ function getRepost() {
 }
 
 function workRepost(data) {
-	if (typeof data.response != "undefined" && data.response.items[0] && data.response.items[0].to_id && whiteList.indexOf(data.response.items[0]) != -1) {
+	if(whiteList.length > 0) {
+		whiteList = shuffle(whiteList);
+		getUser(whiteList.pop());
+	}
+	else if (typeof data.response != "undefined" && data.response.items[0] && data.response.items[0].to_id && whiteList.length == 0) {
 		getUser(data.response.items[0].to_id);
 	} else {
 		returnRandom(data);
@@ -164,7 +168,11 @@ function getLike() {
 }
 
 function workLike(data) {
-	if (typeof data.response != "undefined" && data.response.items[0] && whiteList.indexOf(data.response.items[0]) != -1) {
+	if(whiteList.length > 0) {
+		whiteList = shuffle(whiteList);
+		getUser(whiteList.pop());
+	}
+	else if (typeof data.response != "undefined" && data.response.items[0] && whiteList.length == 0) {
 		getUser(data.response.items[0]);
 	} else {
 		returnRandom(data);
