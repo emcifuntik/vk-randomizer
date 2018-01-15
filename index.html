@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html class="mdl-js">
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
   <title>Рандомайзер</title>
+
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=cyrillic,latin" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.2.0/material.indigo-pink.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -16,6 +17,12 @@
 
     section {
       display: none;
+      /*
+	background-image: url("https://maps.gstatic.com/mapfiles/santatracker/v201512241241/scenes/dorf/img/santa-takeoff.svg");
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	background-size: 50%;
+	*/
     }
 
     #content {
@@ -123,7 +130,7 @@
       background: #4285f4;
       color: white;
       background: url('img/backs/2.jpg') repeat-x;
-      background-position: 23% 92%;
+      background-position: 61% 4%;
     }
 
     .loadingSpinner {
@@ -425,137 +432,105 @@
     }
   </style>
 
-  <style></style>
 </head>
 
-<body onload="start()" style="">
+<body onload="start()">
   <div id="content" class="paper">
-    <div id="label" class="colored flex-row" style="transition: 0.4s; background-position: 54% 24%;">
+    <div id="label" class="colored flex-row">
 
-      <button id="btnBack" class="mdl-button mdl-js-button mdl-button--icon" onclick="changePage(&#39;Main&#39;)" data-upgraded=",MaterialButton"
-        tabindex="0" style="display: none;">
-        <i class="material-icons"></i>
+      <button id="btnBack" class="mdl-button mdl-js-button mdl-button--icon" onclick="changePage('Main')">
+        <i class="material-icons">&#xE88A;</i>
         <!-- home -->
       </button>
-      <div class="mdl-tooltip paper" for="btnBack" data-upgraded=",MaterialTooltip">
+      <div class="mdl-tooltip paper" for="btnBack">
         Вернуться назад
       </div>
 
       <span id="title" class="flex-1">Выбрать победителя конкурса репостов</span>
 
-      <button id="btnRefresh" class="mdl-button mdl-js-button mdl-button--icon" onclick="getWinners()" data-upgraded=",MaterialButton"
-        tabindex="0" style="display: none;">
-        <i class="material-icons"></i>
+      <button id="btnRefresh" class="mdl-button mdl-js-button mdl-button--icon" onclick="getWinners()">
+        <i class="material-icons">&#xE5D5;</i>
         <!-- refresh -->
       </button>
-      <div class="mdl-tooltip paper" for="btnRefresh" data-upgraded=",MaterialTooltip">
+      <div class="mdl-tooltip paper" for="btnRefresh">
         Повторить розыгрыш
       </div>
 
-      <button id="btnFeedback" class="mdl-button mdl-js-button mdl-button--icon shaky" onclick="changePage(&#39;Feedback&#39;)"
-        data-upgraded=",MaterialButton" tabindex="0">
-        <i class="material-icons"></i>
+      <button id="btnFeedback" class="mdl-button mdl-js-button mdl-button--icon shaky" onclick="changePage('Feedback')">
+        <i class="material-icons">&#xE87F;</i>
         <!-- feedback -->
       </button>
-      <div class="mdl-tooltip paper" for="btnFeedback" data-upgraded=",MaterialTooltip">
+      <div class="mdl-tooltip paper" for="btnFeedback">
         Новости
       </div>
 
-      <button id="btnAbout" class="mdl-button mdl-js-button mdl-button--icon" onclick="changePage(&#39;About&#39;)" data-upgraded=",MaterialButton"
-        tabindex="0" style="display: block;">
-        <i class="material-icons"></i>
+      <button id="btnAbout" class="mdl-button mdl-js-button mdl-button--icon" onclick="changePage('About')">
+        <i class="material-icons">&#xE88E;</i>
         <!-- info -->
       </button>
-      <div class="mdl-tooltip paper" for="btnAbout" data-upgraded=",MaterialTooltip">
+      <div class="mdl-tooltip paper" for="btnAbout">
         О приложении
       </div>
 
     </div>
 
     <!-- главная страница -->
-    <section id="pageMain" class="flex-column" style="display: block;">
+    <section id="pageMain" class="flex-column">
 
-      <div id="postLink-container" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo is-upgraded"
-        data-upgraded=",MaterialTextfield">
-        <input type="text" id="postLink" class="mdl-textfield__input" value="">
+      <div id="postLink-container" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+        <input type="text" id="postLink" class="mdl-textfield__input" value="" />
         <label class="mdl-textfield__label" for="postLink">Введите ссылку на конкурс...</label>
         <span id="postLink-error" class="mdl-textfield__error">Ссылка введена с ошибкой!</span>
       </div>
 
       <div class="flex-row">
 
-        <div id="prizeTitle-container" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo flex-3 is-upgraded"
-          data-upgraded=",MaterialTextfield">
-          <input type="text" id="prizeTitle" class="mdl-textfield__input" value="">
+        <div id="prizeTitle-container" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo flex-3">
+          <input type="text" id="prizeTitle" class="mdl-textfield__input" value="" />
           <label class="mdl-textfield__label" for="prizeTitle">Наименование приза...</label>
-          <span id="rizeTitle-error" class="mdl-textfield__error">Обязательно! Не забудьте нажать на кнопку "+"</span>
+          <span id="rizeTitle-error" class="mdl-textfield__error">Обязательно! Не забудьте нажать на кнопку &quot;+&quot;</span>
         </div>
 
-        <div id="prizeValue-container" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label flex-1 is-upgraded" style="margin-left: 10px"
-          data-upgraded=",MaterialTextfield">
-          <input type="text" id="prizeValue" class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" value="">
+        <div id="prizeValue-container" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label flex-1" style="margin-left: 10px">
+          <input type="text" id="prizeValue" class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" value="" />
           <label class="mdl-textfield__label" for="prizeValue">Количество призов...</label>
           <span id="prizeValue-error" class="mdl-textfield__error"></span>
         </div>
 
-        <button id="btnAddPrize" class="mdl-button mdl-js-button mdl-button--icon" onclick="addPrize()" data-upgraded=",MaterialButton">
-          <i class="material-icons"></i>
+        <button id="btnAddPrize" class="mdl-button mdl-js-button mdl-button--icon" onclick="addPrize()">
+          <i class="material-icons">&#xE147;</i>
           <!-- plus circle -->
         </button>
 
       </div>
       <p style="font-size: 12px;" class="chameleon">Выбирать на основе:</p>
-      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events is-checked is-upgraded" for="option-1"
-        style="margin-right: 15px; margin-bottom: 15px;" data-upgraded=",MaterialRadio,MaterialRipple">
-        <input type="radio" id="option-1" class="mdl-radio__button" name="contestType" value="repost" checked="">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1" style="margin-right: 15px; margin-bottom: 15px;">
+        <input type="radio" id="option-1" class="mdl-radio__button" name="contestType" value="repost" checked>
         <span class="mdl-radio__label">Репостов</span>
-        <span class="mdl-radio__outer-circle"></span>
-        <span class="mdl-radio__inner-circle"></span>
-        <span class="mdl-radio__ripple-container mdl-js-ripple-effect mdl-ripple--center" data-upgraded=",MaterialRipple">
-          <span class="mdl-ripple"></span>
-        </span>
       </label>
 
-      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events is-upgraded" for="option-2"
-        data-upgraded=",MaterialRadio,MaterialRipple">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
         <input type="radio" id="option-2" class="mdl-radio__button" name="contestType" value="like">
         <span class="mdl-radio__label">Лайков</span>
-        <span class="mdl-radio__outer-circle"></span>
-        <span class="mdl-radio__inner-circle"></span>
-        <span class="mdl-radio__ripple-container mdl-js-ripple-effect mdl-ripple--center" data-upgraded=",MaterialRipple">
-          <span class="mdl-ripple"></span>
-        </span>
       </label>
 
 
       <div id="prizes">
         <p class="formTitle">Список призов пуст!
-          <b>Не забудьте нажать на кнопку "+"!</b>
+          <b>Не забудьте нажать на кнопку &quot;+&quot;!</b>
         </p>
       </div>
 
-      <label id="chkSubscribtion-label" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events is-checked is-upgraded"
-        for="chkSubscribtion" data-upgraded=",MaterialCheckbox,MaterialRipple">
-        <input type="checkbox" id="chkSubscribtion" class="mdl-checkbox__input" checked="">
+      <label id="chkSubscribtion-label" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="chkSubscribtion">
+        <input type="checkbox" id="chkSubscribtion" class="mdl-checkbox__input" checked />
         <span class="mdl-checkbox__label">Пользователь должен быть подписан на сообщество</span>
-        <span class="mdl-checkbox__focus-helper"></span>
-        <span class="mdl-checkbox__box-outline">
-          <span class="mdl-checkbox__tick-outline"></span>
-        </span>
-        <span class="mdl-checkbox__ripple-container mdl-js-ripple-effect mdl-ripple--center" data-upgraded=",MaterialRipple">
-          <span class="mdl-ripple"></span>
-        </span>
       </label>
 
 
       <div class="buttons">
 
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect colored" onclick="getWinners()" data-upgraded=",MaterialButton,MaterialRipple"
-          style="transition: 0.4s; background-position: 54% 24%;">
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect colored" onclick="getWinners()">
           Определить победителя
-          <span class="mdl-button__ripple-container">
-            <span class="mdl-ripple"></span>
-          </span>
         </button>
       </div>
 
@@ -563,9 +538,9 @@
     <!-- /главная страница -->
 
     <!-- загрузка -->
-    <section id="pageLoading" style="display: none;">
+    <section id="pageLoading">
       <div style="text-align: center; margin-bottom: 15px;">
-        <img src="lib/gift.gif">
+        <img src="img/gift.gif" />
       </div>
 
       <div class="preload-bar style-scope preload-overlay" style="border-radius: 20px;">
@@ -578,19 +553,15 @@
     <!-- /загрузка -->
 
     <!-- feedback -->
-    <section id="pageFeedback" style="display: none;">
+    <section id="pageFeedback">
       <p>
         Теперь у "Рандомайзера" есть отдельная группа. Все новости касательно приложения будут публиковаться только там.
       </p>
 
       <div class="buttons">
 
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect colored" href="https://vk.com/randomizer_app" target="_blank" data-upgraded=",MaterialButton,MaterialRipple"
-          style="transition: 0.4s; background-position: 54% 24%;">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect colored" href="https://vk.com/randomizer_app" target="_blank">
           Перейти в группу
-          <span class="mdl-button__ripple-container">
-            <span class="mdl-ripple"></span>
-          </span>
         </a>
       </div>
 
@@ -598,15 +569,11 @@
     <!-- /feedback -->
 
     <!-- feedbackSent -->
-    <section id="pageFeedbackSent" style="display: none;">
+    <section id="pageFeedbackSent">
       <div class="buttons">
 
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect colored" onclick="changePage(&#39;Main&#39;)" data-upgraded=",MaterialButton,MaterialRipple"
-          style="transition: 0.4s; background-position: 54% 24%;">
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect colored" onclick="changePage('Main')">
           Назад
-          <span class="mdl-button__ripple-container">
-            <span class="mdl-ripple"></span>
-          </span>
         </button>
       </div>
 
@@ -614,15 +581,11 @@
     <!-- /feedbackSent -->
 
     <!-- ошибка -->
-    <section id="pageError" style="display: none;">
+    <section id="pageError">
       <p id="errorMsg">Недостаточно участников, чтобы разыграть все призы!</p>
       <div class="buttons">
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect colored" onclick="changePage(&#39;Main&#39;)" data-upgraded=",MaterialButton,MaterialRipple"
-          style="transition: 0.4s; background-position: 54% 24%;">
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect colored" onclick="changePage('Main')">
           Назад
-          <span class="mdl-button__ripple-container">
-            <span class="mdl-ripple"></span>
-          </span>
         </button>
       </div>
 
@@ -630,7 +593,7 @@
     <!-- /ошибка -->
 
     <!-- о приложении -->
-    <section id="pageAbout" style="display: none;">
+    <section id="pageAbout">
       <p>
         <b>"Рандомайзер"</b> - это самый быстрый и удобный способ выбрать победителя вашего конкурса ВКонтакте.
         <br> Вам больше не нужно пользоваться несколькими программами, генерировать случайные числа и самостоятельно отсчитывать
@@ -641,33 +604,25 @@
       </p>
       <p class="total emotion">Уже проведено
         <span style="font-size:45px; line-height:45px;">
-          <br>779194</span>
+          <br>779198</span>
         <br>конкурсов</p>
     </section>
 
     <!-- /о приложении -->
 
     <!-- результат -->
-    <section id="pageResult" style="display: none;">
+    <section id="pageResult">
       <p id="result-text"></p>
       <div id="result" style="line-height: 0;"></div>
 
       <div id="resultButtons" class="buttons">
 
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect colored buttonWithIcon" style="margin-right: 10px; transition: 0.4s; background-position: 54% 24%;"
-          onclick="saveList()" data-upgraded=",MaterialButton,MaterialRipple">
-          <i class="material-icons"></i>Сохранить как текст...
-          <span class="mdl-button__ripple-container">
-            <span class="mdl-ripple"></span>
-          </span>
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect colored buttonWithIcon" style="margin-right: 10px" onclick="saveList()">
+          <i class="material-icons">&#xE2C4;</i>Сохранить как текст...
         </button>
 
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect colored buttonWithIcon" onclick="saveScreen()" data-upgraded=",MaterialButton,MaterialRipple"
-          style="transition: 0.4s; background-position: 54% 24%;">
-          <i class="material-icons"></i>Сохранить как изображение...
-          <span class="mdl-button__ripple-container">
-            <span class="mdl-ripple"></span>
-          </span>
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect colored buttonWithIcon" onclick="saveScreen()">
+          <i class="material-icons">&#xE2C4;</i>Сохранить как изображение...
         </button>
       </div>
     </section>
@@ -677,257 +632,266 @@
 
   </div>
 
-  <p id="likeText">Нравится приложение - поставь хорошую оценку!</p>
+  <p id="likeText">Капля плохой оценки приложению убивает лощадь!</p>
 
-
-  <script src="lib/jquery.min.js"></script>
-  <script src="lib/material.min.js"></script>
-
-
-  <script src="lib/xd_connection.js" type="text/javascript"></script>
-  <script src="lib/html2canvas.js" type="text/javascript"></script>
-
-
-
-  <script src="lib/functions.js" type="text/javascript"></script>
-  <script src="lib/vk-part.js" type="text/javascript"></script>
-  <script>
-    var i = 0;
-    var pos1 = 23;
-    var pos2 = 92;
-    var result = new Array();
-    var prizes = new Array();
-    var prizeTitles = new Array();
-    var prizesCount = 0;
-
-    var curPrize = 0;
-    var oldcolor = '0,0,0',
-      curcolor = '0,0,0';
-    var backLink = 0;
-
-    userID = '238487654';
-    VK.init(function () {
-      console.debug("success");
-    }, function () {
-      console.debug("failed");
-    }, '5.37');
-
-
-    function start() {
-      changePage('Main');
-    }
-
-    function addPrize() {
-      var prizeTitle = document.querySelector('#prizeTitle');
-      var prizeValue = document.querySelector('#prizeValue');
-      var res = true;
-
-      if (prizeTitle.value == "") {
-        prizeTitle.setAttribute('invalid', 'true');
-        res = false;
-      } else {
-        prizeTitle.removeAttribute('invalid');
-      }
-
-      if (prizeValue.value == "") {
-        prizeValue.setAttribute('invalid', 'true');
-        res = false;
-      } else {
-        prizeValue.removeAttribute('invalid');
-      }
-
-      if (!res) return false;
-
-      prizes["prize-" + curPrize] = {
-        title: prizeTitle.value,
-        value: prizeValue.value
-      };
-
-      ++curPrize;
-      prizeTitle.value = "";
-      prizeValue.value = "";
-      document.querySelector('#prizeTitle-container').className += document.querySelector('#prizeTitle-container').className
-        .replace('is-invalid', '');
-      document.querySelector('#prizeValue-container').className += document.querySelector('#prizeValue-container').className
-        .replace('is-invalid', '');
-      showPrizes();
-    }
-
-    function deletePrize(id) {
-      document.querySelector('#' + id).outerHTML = "";
-      delete prizes[id];
-
-
-      showPrizes();
-    }
-
-    function countPrizes() {
-      prizeTitles = new Array();
-      prizesCount = 0;
-      if (Object.size(prizes) > 0) {
-        for (var key in prizes) {
-          var prize = prizes[key];
-          for (var i = 0; i < parseInt(prize.value); ++i) {
-            prizeTitles.push(prize.title);
-            ++prizesCount;
-          }
-        }
-      }
-    }
-
-    function showPrizes() {
-      var prizesList = document.querySelector('#prizes');
-      prizesList.innerHTML = "";
-      countPrizes();
-
-      if (prizesCount > 0) {
-
-        prizesList.innerHTML = '<p id="prizesLabel" class="formTitle">Список призов (всего: ' + prizesCount +
-          ' шт.):</p>';
-        for (var key in prizes) {
-          var item = prizes[key];
-          var prize = document.createElement('div');
-          prize.innerHTML = item.title + " - " + item.value + ' шт.<a class="deletePrize" onclick="deletePrize(\'' +
-            key + '\')">&nbsp;</a>';
-          prize.setAttribute('id', key);
-          prize.setAttribute('class', 'prizeItem');
-
-          prizesList.appendChild(prize);
-        }
-      } else {
-        prizesList.innerHTML =
-          '<p class="formTitle">Список призов пуст! <b>Не забудьте нажать на кнопку &quot;+&quot;!</b></p>';
-      }
-    }
-
-    function hideControls() {
-      var btnBack = document.querySelector('#btnBack');
-      var btnRefresh = document.querySelector('#btnRefresh');
-      var btnAbout = document.querySelector('#btnAbout');
-      btnBack.style.display = 'none';
-      btnAbout.style.display = 'none';
-      btnRefresh.style.display = 'none';
-    }
-
-    function changeControls(page) {
-      var pages = document.querySelector('#pages');
-      var title = document.querySelector('#title');
-
-      var btnBack = document.querySelector('#btnBack');
-      var btnRefresh = document.querySelector('#btnRefresh');
-      var btnAbout = document.querySelector('#btnAbout');
-
-      btnBack.style.display = 'block';
-
-      switch (page) {
-        case "Result":
-          title.innerHTML = "Поздравляем победителей!";
-          btnRefresh.style.display = 'block';
-          btnAbout.style.display = 'block';
-          break;
-        case "Loading":
-          title.innerHTML = "Выбираем победителей...";
-          break;
-        case "Feedback":
-          title.innerHTML = "Оставить отзыв";
-          break;
-        case "FeedbackSent":
-          title.innerHTML = "Отзыв отправлен";
-          break;
-        case "About":
-          title.innerHTML = "О приложении";
-          break;
-        case "Error":
-          title.innerHTML = "\"Хьюстон, у нас проблемы\"";
-          break;
-        default:
-          title.innerHTML = "Выбрать победителя конкурса репостов";
-          btnAbout.style.display = 'block';
-          btnBack.style.display = 'none';
-          break;
-      }
-    }
-
-    function changePage(page) {
-      hideControls();
-      animate();
-      elements = document.getElementsByTagName('section');
-      for (var i = 0; i < elements.length; i++) {
-        elements[i].style.display = "none"
-      }
-      setTimeout(resizeWindowToFitAll, 1000);
-      document.querySelector('#page' + page).style.display = "block";
-      changeControls(page);
-    }
-
-    function img_create(src, alt, title) {
-      var img = document.createElement('img');
-      img.src = src;
-      if (alt != null) img.alt = alt;
-      if (title != null) img.title = title;
-      return img;
-    }
-
-    function checkInput() {
-      var res = true;
-      var postLink = document.querySelector('#postLink');
-      var prizes = document.querySelector('#prizes');
-
-      if (postLink.value.toLowerCase().indexOf("wall") < 0) {
-        postLink.setAttribute('invalid', 'true');
-        document.querySelector('#postLink-container').className += " is-invalid";
-        res = false;
-      }
-
-      if (!document.querySelector('#prizesLabel')) {
-        document.querySelector('#prizeTitle-container').className += " is-invalid";
-        document.querySelector('#prizeValue-container').className += " is-invalid";
-        res = false;
-      }
-
-      return res;
-    }
-
-    function parseLink(url) {
-      var parse = url.split("wall");
-      url = parse[1];
-      parse = url.split("&");
-      url = parse[0];
-      parse = url.split("%");
-      url = parse[0];
-      parse = url.split("_");
-
-      var post = {
-        owner: parse[0],
-        post_id: parse[1]
-      };
-      //console.debug(post);
-      return post;
-    }
-
-    function showError(msg) {
-      document.querySelector('#errorMsg').innerHTML = msg;
-      changePage('Error');
-    }
-
-    function submitFeedback() {
-      var feedback = document.querySelector("#inputFeedback").value;
-      var user = document.querySelector("#feedbackUser").value;
-      var vars = {
-        user: user,
-        text: feedback
-      };
-      $.post('feedback.php', vars);
-      changePage('FeedbackSent');
-      document.querySelector("#btnFeedback").style.display = "none";
-    }
-
-    function repaint() {
-
-    }
-  </script>
-
-
+  </div>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://storage.googleapis.com/code.getmdl.io/1.2.0/material.min.js"></script>
 </body>
+
+<script src="//vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
+<script src="ext/html2canvas.js" type="text/javascript"></script>
+
+
+
+<script src="js/functions.js?rnd=OV3caKNCCD" type="text/javascript"></script>
+<script src="js/vk-part.js?rnd=7MA4lCxzq6" type="text/javascript"></script>
+<script>
+  var i = 0;
+  var pos1 = 61;
+  var pos2 = 4;
+  var result = new Array();
+  var prizes = new Array();
+  var prizeTitles = new Array();
+  var prizesCount = 0;
+
+  var curPrize = 0;
+  var oldcolor = '0,0,0',
+    curcolor = '0,0,0';
+  var backLink = 0;
+
+  userID = '238487654';
+  VK.init(function () {
+    console.debug("success");
+  }, function () {
+    console.debug("failed");
+  }, '5.37');
+
+
+  function start() {
+    changePage('Main');
+  }
+
+  function addPrize() {
+    var prizeTitle = document.querySelector('#prizeTitle');
+    var prizeValue = document.querySelector('#prizeValue');
+    var res = true;
+
+    if (prizeTitle.value == "") {
+      prizeTitle.setAttribute('invalid', 'true');
+      res = false;
+    } else {
+      prizeTitle.removeAttribute('invalid');
+    }
+
+    if (prizeValue.value == "") {
+      prizeValue.setAttribute('invalid', 'true');
+      res = false;
+    } else {
+      prizeValue.removeAttribute('invalid');
+    }
+
+    if (!res) return false;
+
+    prizes["prize-" + curPrize] = {
+      title: prizeTitle.value,
+      value: prizeValue.value
+    };
+
+    ++curPrize;
+    prizeTitle.value = "";
+    prizeValue.value = "";
+    document.querySelector('#prizeTitle-container').className += document.querySelector('#prizeTitle-container').className
+      .replace('is-invalid', '');
+    document.querySelector('#prizeValue-container').className += document.querySelector('#prizeValue-container').className
+      .replace('is-invalid', '');
+    showPrizes();
+  }
+
+  function deletePrize(id) {
+    document.querySelector('#' + id).outerHTML = "";
+    delete prizes[id];
+
+
+    showPrizes();
+  }
+
+  function countPrizes() {
+    prizeTitles = new Array();
+    prizesCount = 0;
+    if (Object.size(prizes) > 0) {
+      for (var key in prizes) {
+        var prize = prizes[key];
+        for (var i = 0; i < parseInt(prize.value); ++i) {
+          prizeTitles.push(prize.title);
+          ++prizesCount;
+        }
+      }
+    }
+  }
+
+  function showPrizes() {
+    var prizesList = document.querySelector('#prizes');
+    prizesList.innerHTML = "";
+    countPrizes();
+
+    if (prizesCount > 0) {
+
+      prizesList.innerHTML = '<p id="prizesLabel" class="formTitle">Список призов (всего: ' + prizesCount +
+        ' шт.):</p>';
+      for (var key in prizes) {
+        var item = prizes[key];
+        var prize = document.createElement('div');
+        prize.innerHTML = item.title + " - " + item.value + ' шт.<a class="deletePrize" onclick="deletePrize(\'' + key +
+          '\')">&nbsp;</a>';
+        prize.setAttribute('id', key);
+        prize.setAttribute('class', 'prizeItem');
+
+        prizesList.appendChild(prize);
+      }
+    } else {
+      prizesList.innerHTML =
+        '<p class="formTitle">Список призов пуст! <b>Не забудьте нажать на кнопку &quot;+&quot;!</b></p>';
+    }
+  }
+
+  function hideControls() {
+    var btnBack = document.querySelector('#btnBack');
+    var btnRefresh = document.querySelector('#btnRefresh');
+    var btnAbout = document.querySelector('#btnAbout');
+    btnBack.style.display = 'none';
+    btnAbout.style.display = 'none';
+    btnRefresh.style.display = 'none';
+  }
+
+  function changeControls(page) {
+    var pages = document.querySelector('#pages');
+    var title = document.querySelector('#title');
+
+    var btnBack = document.querySelector('#btnBack');
+    var btnRefresh = document.querySelector('#btnRefresh');
+    var btnAbout = document.querySelector('#btnAbout');
+
+    btnBack.style.display = 'block';
+
+    switch (page) {
+      case "Result":
+        title.innerHTML = "Поздравляем победителей!";
+        btnRefresh.style.display = 'block';
+        btnAbout.style.display = 'block';
+        break;
+      case "Loading":
+        title.innerHTML = "Выбираем победителей...";
+        break;
+      case "Feedback":
+        title.innerHTML = "Оставить отзыв";
+        break;
+      case "FeedbackSent":
+        title.innerHTML = "Отзыв отправлен";
+        break;
+      case "About":
+        title.innerHTML = "О приложении";
+        break;
+      case "Error":
+        title.innerHTML = "\"Хьюстон, у нас проблемы\"";
+        break;
+      default:
+        title.innerHTML = "Выбрать победителя конкурса репостов";
+        btnAbout.style.display = 'block';
+        btnBack.style.display = 'none';
+        break;
+    }
+  }
+
+  function changePage(page) {
+    hideControls();
+    animate();
+    elements = document.getElementsByTagName('section');
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].style.display = "none"
+    }
+    setTimeout(resizeWindowToFitAll, 1000);
+    document.querySelector('#page' + page).style.display = "block";
+    changeControls(page);
+  }
+
+  function img_create(src, alt, title) {
+    var img = document.createElement('img');
+    img.src = src;
+    if (alt != null) img.alt = alt;
+    if (title != null) img.title = title;
+    return img;
+  }
+
+  function checkInput() {
+    var res = true;
+    var postLink = document.querySelector('#postLink');
+    var prizes = document.querySelector('#prizes');
+
+    if (postLink.value.toLowerCase().indexOf("wall") < 0) {
+      postLink.setAttribute('invalid', 'true');
+      document.querySelector('#postLink-container').className += " is-invalid";
+      res = false;
+    }
+
+    if (!document.querySelector('#prizesLabel')) {
+      document.querySelector('#prizeTitle-container').className += " is-invalid";
+      document.querySelector('#prizeValue-container').className += " is-invalid";
+      res = false;
+    }
+
+    return res;
+  }
+
+  function parseLink(url) {
+    var parse = url.split("wall");
+    url = parse[1];
+    parse = url.split("&");
+    url = parse[0];
+    parse = url.split("%");
+    url = parse[0];
+    parse = url.split("_");
+
+    var post = {
+      owner: parse[0],
+      post_id: parse[1]
+    };
+    //console.debug(post);
+    return post;
+  }
+
+  function showError(msg) {
+    document.querySelector('#errorMsg').innerHTML = msg;
+    changePage('Error');
+  }
+
+  function submitFeedback() {
+    var feedback = document.querySelector("#inputFeedback").value;
+    var user = document.querySelector("#feedbackUser").value;
+    var vars = {
+      user: user,
+      text: feedback
+    };
+    $.post('feedback.php', vars);
+    changePage('FeedbackSent');
+    document.querySelector("#btnFeedback").style.display = "none";
+  }
+
+  function repaint() {
+    /*
+    var tmp = curcolor;
+    var img = img_create('img/backs/2.jpg', 'Nope', 'Yep');
+    var canvas = $('<canvas/>')[0];
+    canvas.width = img.width;
+    canvas.height = img.height;
+    canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
+    var pixelData = canvas.getContext('2d').getImageData((img.width / 100)*pos1, (img.height / 100)*pos2, 1, 1).data;
+
+    curcolor = pixelData[0] + ',' + pixelData[1] + ',' + pixelData[2];
+    document.head.innerHTML = document.head.innerHTML.replace(new RegExp(oldcolor, 'g'), curcolor);
+    oldcolor = curcolor;
+    */
+  }
+</script>
 
 </html>
